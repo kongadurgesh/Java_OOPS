@@ -1,9 +1,12 @@
+import objects.Account;
 import objects.Bike;
 import objects.Car;
 import objects.Cat;
 import objects.Circle;
 import objects.Dog;
 import objects.Employee;
+import objects.Engine;
+import objects.Library;
 import objects.MathOperations;
 import objects.Person;
 import objects.Rectangle;
@@ -19,6 +22,28 @@ public class App {
         q5AbstractClassAndMethods();
         q6Interfaces();
         q7ConstructorOverLoading();
+        q8Composition();
+        q9InnerClasses();
+        q10Exceptions();
+    }
+
+    private static void q10Exceptions() {
+        Account account = new Account();
+        account.deposit(123);
+        account.withdraw(345);
+        account.deposit(-1);
+    }
+
+    private static void q9InnerClasses() {
+        Library library = new Library();
+        library.addBook("Home", "Oliver Twist");
+        library.addBook("Algorithms", "Naraimha karumanchi");
+        System.out.println(library.getBooks());
+    }
+
+    private static void q8Composition() {
+        Car car = new Car("Hundai", "i10", 2023, new Engine(100));
+        car.getCarDetails();
     }
 
     private static void q7ConstructorOverLoading() {
