@@ -1,16 +1,26 @@
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 import objects.Account;
 import objects.Bike;
+import objects.Box;
 import objects.Car;
 import objects.Cat;
 import objects.Circle;
+import objects.Counter;
+import objects.DataBaseConnection;
 import objects.Dog;
 import objects.Employee;
 import objects.Engine;
+import objects.FileManager;
 import objects.Library;
 import objects.MathOperations;
 import objects.Person;
 import objects.Rectangle;
 import objects.Shape;
+import objects.Student;
 import objects.Vehicle;
 
 public class App {
@@ -25,6 +35,73 @@ public class App {
         q8Composition();
         q9InnerClasses();
         q10Exceptions();
+        q11Generics();
+        q12FileIO();
+        q13Collections();
+        q14Threads();
+        q15Singleton();
+    }
+
+    private static void q15Singleton() {
+        DataBaseConnection dataBaseConnection1 = DataBaseConnection.getDataBaseConnection();
+
+        DataBaseConnection baseConnection = DataBaseConnection.getDataBaseConnection();
+
+        System.out.println("dataBaseConnection1: " + dataBaseConnection1.hashCode());
+        System.out.println("baseConnection: " + baseConnection.hashCode());
+
+        System.out.println(dataBaseConnection1.hashCode() == baseConnection.hashCode());
+    }
+
+    private static void q14Threads() throws InterruptedException {
+        Counter counter = new Counter();
+
+        Thread thread1 = new Thread(() -> {
+            for (int i = 0; i < 2000; i++) {
+                counter.increment();
+            }
+        });
+        Thread thread2 = new Thread(() -> {
+            for (int i = 0; i < 2000; i++) {
+                counter.increment();
+            }
+        });
+        thread1.start();
+        thread2.start();
+        thread1.join();
+        thread2.join();
+        System.out.println(counter.getCount());
+    }
+
+    private static void q13Collections() {
+        Student student = new Student(123, "Durgesh", 'A');
+        Student student2 = new Student(234, "Alice", 'B');
+
+        List<Student> students = Arrays.asList(student, student2);
+
+        Iterator<Student> iterator = students.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next().toString());
+        }
+    }
+
+    private static void q12FileIO() throws IOException {
+        FileManager fileManager = new FileManager();
+        List<String> names = Arrays.asList("Durgesh", "Konga");
+        fileManager.writeData(names);
+
+        fileManager.readData();
+    }
+
+    private static void q11Generics() {
+        Box<Integer> integerBox = new Box<>();
+        integerBox.setObject(123);
+        System.out.println(integerBox.getObject());
+
+        Box<Car> carBox = new Box<>();
+        carBox.setObject(new Car("Honda", "City", 2021));
+        System.out.println(carBox.getObject());
     }
 
     private static void q10Exceptions() {
